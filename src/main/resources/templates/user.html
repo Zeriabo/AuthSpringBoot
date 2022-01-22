@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>List Users</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container text-center">
+    <div>
+        <form th:action="@{/logout}" method="get">
+            <p>
+                Welcome 
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
+    <div>
+        <h1>List of Information</h1>
+    </div>
+     
+    <div>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    
+                    <th>Birthday</th>
+                     <th>email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+           <form th:action="@{/update/{id}(id=${user.id})}"  th:method="post"style="max-width: 600px; margin: 0 auto;">
+                <tr th:each="user: ${listUsers}">
+                
+                    <td th:text="${user.birthday}">Birthday</td>
+                    <td th:text="${user.email}">E-mail</td>
+                    <td th:text="${user.firstName}">First Name</td>
+                    <td th:text="${user.lastName}">Last Name</td>
+                    <td th:text="${user.username}">User Name</td>
+                    <td th:text="${user.password}">Password</td>
+                </tr>
+
+                <td><input type="text" th:field="*{user.birthday}" id="username" placeholder="Username"></td>               
+                <td><input type="text" th:field="*{user.email}" id="username" placeholder="Username"></td>
+               <td><input type="text" th:field="*{user.firstname}" id="username" placeholder="Username"></td>
+              <td><input type="text" th:field="*{user.lastname}" id="username" placeholder="Username"></td>
+               <td><input type="text" th:field="*{user.username}" id="username" placeholder="Username"></td>
+               <td><input type="text" th:field="*{user.password}" id="username" placeholder="Username"></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+    <input type="submit" value ="Update">
+    </form>
+    </div>
+</div>
+</body>
+</html>
