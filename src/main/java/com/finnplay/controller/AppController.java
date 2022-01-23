@@ -53,6 +53,11 @@ public class AppController {
   
         return "sign_in";
     }
+    @GetMapping("/forgetPassword")
+    public String showForgetPasswordForm(Model model) {
+  
+        return "forget_password";
+    }
     @PostMapping("/process_register")
     public String processRegister(User user) {
        
@@ -67,6 +72,65 @@ public class AppController {
             userRepo.save(user1);
          
         return "register_success";
+    }
+    
+    @PostMapping("/process_getQuestion")
+    public String getQuestion(User user,Model model)
+    {
+    	 String username=    user.getUsername();
+    	  String url = "sign_in";
+    	List<User> users = userRepo.findAll();
+    	for (int i = 0; i < users.size(); i++) {
+    		User other = users.get(i);
+    		if(other.getUsername().equals(username))
+    		{
+    			String question=other.getQuestion();
+		        String answer = other.getAnswer();
+		      
+   			 model.addAttribute("user", other);
+    		}
+    		    
+    		 
+    			
+    		url=	"forget_password";
+    			
+    		
+    			
+    		
+    	}
+		return url;
+    	
+    }
+    @PostMapping("/process_forgetpassword")
+    public String forgetPassword(User user,Model model)
+    {
+    	  String url = "sign_in";
+    	  String answersubmitted=    user.getAnswer();
+    	  String username = user.getUsername();
+    	List<User> users = userRepo.findAll();
+    	for (int i = 0; i < users.size(); i++) {
+    		User other = users.get(i);
+    		
+    		    String question=other.getQuestion();
+    		    String answer = other.getAnswer();
+    			if(answersubmitted.equals(answer))
+    			{
+    				 model.addAttribute("user", other);
+    				 url=	"password";
+    			}else {
+    				
+    				url=	"sign_in";
+    			}
+    			
+    			 
+    		
+    			
+    		
+    			
+    		
+    	}
+		return url;
+    	
     }
     
     @PostMapping("/process_signin")

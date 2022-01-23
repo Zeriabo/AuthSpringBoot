@@ -36,7 +36,11 @@ public class User {
   
     @Column(name="password",nullable = false, unique = true, length = 45)
     private String password;
-
+    
+    @Column(name="question",nullable = true, length = 45)
+    private String question;
+    @Column(name="answer",nullable = true, length = 45)
+    private String answer;
 
     @Transient
     private String passwordConfirm;
@@ -108,5 +112,17 @@ public class User {
 	public void setIslogged(boolean islogged) {
 		this.islogged = islogged;
 	}
+	public void setQuestion(String question) {
+        this.question = question;
+    }
+    public String getQuestion() {
+        return question;
+    }
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+    public String getAnswer() {
+        return answer;
+    }
   
 }
