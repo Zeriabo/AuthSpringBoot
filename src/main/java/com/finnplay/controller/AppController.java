@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.finnplay.springboot.model.User;
-import com.finnplay.springboot.repository.UserCustomRepository;
 import com.finnplay.springboot.repository.UserRepository;
  
 @Controller
@@ -23,15 +22,24 @@ public class AppController {
     @Autowired
     private UserRepository userRepo;
     
-    private UserCustomRepository userCustomRepository;
+   
      
     @GetMapping("/")
     public String viewHomePage() {
         return "index";
     }
     
-    @GetMapping("/logout")
-    public String logout() {
+    @PostMapping("/logout")
+    public String logout(User user) {
+    	 List<User> users = userRepo.findAll();	
+    	for(User u: users)
+    	{
+    		if(u.isIslogged())
+    		{
+    			u.setIslogged(false);
+    			userRepo.save(u);
+    		}
+    	}
         return "index";
     }
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -75,11 +83,17 @@ public class AppController {
      for (int i = 0; i < users.size(); i++) {
 		User other = users.get(i);
 		if(other.getUsername().equals(username) && other.getPassword().equals(pass))
-
 		{
+			if(!other.isIslogged()) {
 			other.setIslogged(true);
+			 userRepo.save(other);
 			 model.addAttribute("user", other);
 		url=	"user";
+			}else 
+			{
+				 model.addAttribute("user", other);
+				url ="user";
+			}
 		}
 			
 		
@@ -97,7 +111,7 @@ public class AppController {
             user.setId(id);
             return "user";
         }
-            
+        user.setIslogged(true);
         userRepo.save(user);
         return "user";
     }

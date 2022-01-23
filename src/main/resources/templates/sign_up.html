@@ -5,6 +5,19 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+var check = function() {
+  if (document.getElementById('password').value ==
+    document.getElementById('confirm_password').value && document.getElementById('password').value!="") {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'matching';
+    document.getElementById('register').disabled = false;
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'not matching';
+  }
+}
+    </script>
 </head>
 <body>
     <div class="container text-center">
@@ -30,16 +43,16 @@
     
  <label for="username"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="username" id="username" required>
-
+<div>
+    <span id='message'></span></div>
     <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" id="password" required>
-
+    <input type="password" placeholder="Enter Password" name="password" onkeyup='check();'  id="password" required>
+<br />
     <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+    <input type="password" placeholder="Repeat Password" onkeyup='check();'  name="confirm_password" id="confirm_password" required>
     <hr>
 
-    
-    <button type="submit" class="registerbtn">Register</button>
+    <button type="submit" disabled="true" id="register" class="registerbtn">Register</button>
   </div>
 
   <div class="container signin">
