@@ -80,22 +80,21 @@ public class AppController {
     	String answer = user.getAnswer();
     	String username = user.getUsername();
     	List<User> users = userRepo.findAll();
-    	 users.forEach((userinside) -> {
-        if (userinside.getAnswer().equals(answer))
-        {
-        	processUrl(url,"password");
-        	        
-        }
-         });
+    for(User u : users)
+    {
+    	if(u.getUsername().equals(username))
+    	{
+    	if(u.getAnswer().equals(answer) )
+    	{
+    		url="password";
+    		model.addAttribute("user", u);
+    	}
+    	}
+    }
     	 return url;
 
     }
-    public String processUrl(String url,String value)
-    {
-    	
-		return url=value;
-    	
-    }
+  
     @PostMapping("/process_getQuestion")
     public String getQuestion(User user,Model model)
     {
