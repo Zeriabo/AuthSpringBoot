@@ -76,24 +76,24 @@ public class AppController {
     @PostMapping("/process_QuestionAnswer")
     public String AnswerQuestion(User user, Model model)
     {
-    	 String url=null;
+    	 String url="sign_in";
     	String answer = user.getAnswer();
     	String username = user.getUsername();
     	List<User> users = userRepo.findAll();
     	 users.forEach((userinside) -> {
         if (userinside.getAnswer().equals(answer))
         {
-        	processUrl("password");
+        	processUrl(url,"password");
         	        
         }
          });
-    	 return processUrl("sign_in");
+    	 return url;
 
     }
-    public String processUrl(String url)
+    public String processUrl(String url,String value)
     {
     	
-		return url;
+		return url=value;
     	
     }
     @PostMapping("/process_getQuestion")
