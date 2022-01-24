@@ -73,7 +73,29 @@ public class AppController {
          
         return "register_success";
     }
-    
+    @PostMapping("/process_QuestionAnswer")
+    public String AnswerQuestion(User user, Model model)
+    {
+    	 String url=null;
+    	String answer = user.getAnswer();
+    	String username = user.getUsername();
+    	List<User> users = userRepo.findAll();
+    	 users.forEach((userinside) -> {
+        if (userinside.getAnswer().equals(answer))
+        {
+        	processUrl("password");
+        	        
+        }
+         });
+    	 return processUrl("sign_in");
+
+    }
+    public String processUrl(String url)
+    {
+    	
+		return url;
+    	
+    }
     @PostMapping("/process_getQuestion")
     public String getQuestion(User user,Model model)
     {
@@ -92,7 +114,7 @@ public class AppController {
     		    
     		 
     			
-    		url=	"forget_password";
+    		url=	"questionAnswer";
     			
     		
     			
