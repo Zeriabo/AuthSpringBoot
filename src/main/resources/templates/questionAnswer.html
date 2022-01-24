@@ -1,0 +1,41 @@
+
+<html>
+<head>
+   
+    <title>Forget your password </title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+    </script>
+</head>
+<body>
+    <div class="container text-center">
+ <div class="hide-md-lg">
+ <a href="/">Home</a>.</p>
+        
+        </div>
+        <form th:action="@{/process_QuestionAnswer}" th:method="post"style="max-width: 600px; margin: 0 auto;">
+        <input type="text"  name="username" th:field="*{user.username}"  placeholder="Username" id="username"  >
+        <input type="text"  name="question"  th:field="*{user.question}" placeholder="Question" id="question" >
+        <input type="text"  name="answer"   placeholder="Answer" id="answer" >
+
+        <input type="submit" value="answer">
+</form>
+</div >
+
+
+    </div>
+  </form>
+</div>
+
+<div class="bottom-container">
+  <div class="row">
+    <div class="col">
+      <a href="/register" style="color:rgb(80, 86, 255)" class="btn">Sign up</a>
+    </div>
+ 
+  </div>
+    </div>
+</body>
+</html>
